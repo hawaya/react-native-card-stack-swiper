@@ -445,6 +445,30 @@ class CardStack extends Component {
     return { pointerEvents: topCard === topCardName ? "auto" : "none" }
   }
 
+  renderLikeLabel(){
+    const { drag } = this.state
+    const likeOpacity = drag.x.interpolate({ inputRange: [-width / 3, width * .025, width / 3], outputRange: [0, 0, 1], extrapolate: 'clamp', });
+    return(
+      <Animated.View style={{ transform: [{ rotate: "-22.5deg" }], opacity: likeOpacity, position: "absolute", top: '40%', left: '10%', zIndex: 1000 }} >
+        <Text style={{ backgroundColor: 'dodgerblue', color: "white", fontSize: 48, fontWeight: "200", paddingHorizontal: 10, paddingVertical: 5, borderRadius: 15, overflow: 'hidden', }} >
+          LIKE
+        </Text>
+      </Animated.View>
+    )
+  }
+
+  renderNopeLabel(){
+    const { drag } = this.state
+    const likeOpacity = drag.x.interpolate({ inputRange: [-width / 3, 0, width / 3], outputRange: [1, 0, 0], extrapolate: 'clamp', });
+    return(
+      <Animated.View style={{ transform: [{ rotate: "22.5deg" }], opacity: likeOpacity, position: "absolute", top: '40%', right: '10%', zIndex: 1000 }} >
+        <Text style={{ backgroundColor: 'red', color: "white", fontSize: 48, fontWeight: "200", paddingHorizontal: 10, paddingVertical: 5, borderRadius: 15, overflow: 'hidden', }} >
+          PASS
+        </Text>
+      </Animated.View>
+    )
+  }
+
   render() {
 
     const { secondCardZoom, renderNoMoreCards } = this.props;
@@ -484,6 +508,8 @@ class CardStack extends Component {
             ]
           }, this.props.cardContainerStyle]}>
           {cardB}
+          {(topCard === 'cardB') ? this.renderLikeLabel() : null}
+          {(topCard === 'cardB') ? this.renderNopeLabel() : null}
         </Animated.View>
         <Animated.View
           {...this._setPointerEvents(topCard, 'cardA')}
@@ -503,6 +529,8 @@ class CardStack extends Component {
             ]
           }, this.props.cardContainerStyle]}>
           {cardA}
+          {(topCard === 'cardB') ? this.renderLikeLabel() : null}
+          {(topCard === 'cardB') ? this.renderNopeLabel() : null}
         </Animated.View>
 
       </View>
