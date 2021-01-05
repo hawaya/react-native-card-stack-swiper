@@ -449,22 +449,30 @@ class CardStack extends Component {
     const { renderLikeLabel, renderLikeLabelStyle } = this.props
     const { drag } = this.state
     const likeOpacity = drag.x.interpolate({ inputRange: [-width / 3, width * .025, width / 3], outputRange: [0, 0, 1], extrapolate: 'clamp', });
-    return(
-      <Animated.View style={[renderLikeLabelStyle, { opacity: likeOpacity }]} >
-        {renderLikeLabel()}
-      </Animated.View>
-    )
+    if (renderLikeLabel) {
+      return(
+        <Animated.View style={[renderLikeLabelStyle, { opacity: likeOpacity }]} >
+          {renderLikeLabel()}
+        </Animated.View>
+      )
+    } else {
+      return null
+    }
   }
 
   renderNopeLabel(){
     const { renderNopeLabel, renderNopeLabelStyle } = this.props
     const { drag } = this.state
     const nopeOpacity = drag.x.interpolate({ inputRange: [-width / 3, 0, width / 3], outputRange: [1, 0, 0], extrapolate: 'clamp', });
-    return(
-      <Animated.View style={[renderNopeLabelStyle, { opacity: nopeOpacity }]} >
-        {renderNopeLabel()}
-      </Animated.View>
-    )
+    if (renderNopeLabel) {
+      return(
+        <Animated.View style={[renderNopeLabelStyle, { opacity: nopeOpacity }]} >
+          {renderNopeLabel()}
+        </Animated.View>
+      )
+    } else {
+      return null
+    }
   }
 
   render() {
