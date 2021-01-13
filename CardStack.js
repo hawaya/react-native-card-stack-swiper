@@ -351,6 +351,23 @@ class CardStack extends Component {
     this._nextCard('left', -width * 1.5, 0, d || this.props.duration);
   }
 
+  currentCardIndex() {
+    return this.state.sindex - 2
+  }
+
+  swipeTo(targetCard = 0) {
+    this.setState({
+      sindex: targetCard
+    })
+    this._nextCard('right', width, 0, 0);
+    setTimeout(() => {
+      this.setState({
+        sindex: targetCard
+      })
+      this._nextCard('right', width, 0, 100);
+    }, 50);
+  }
+
   _nextCard(direction, x, y, duration = 400) {
     const { verticalSwipe, horizontalSwipe, loop } = this.props;
     const { sindex, cards, topCard } = this.state;
