@@ -362,9 +362,9 @@ class CardStack extends Component {
     this._nextCard('left', width, 0, 0);
     setTimeout(() => {
       this.setState({
-        sindex: targetCard
+        sindex: Platform.OS === 'android' ? targetCard+1 : targetCard
       })
-      this._nextCard('left', width, 0, 100);
+      this._nextCard('left', width, 0, Platform.OS === 'android' ? 0 : 100);
     }, 50);
   }
 
