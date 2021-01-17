@@ -359,12 +359,12 @@ class CardStack extends Component {
     this.setState({
       sindex: targetCard
     })
-    this._nextCard('right', width, 0, 0);
+    this._nextCard('left', width, 0, 0);
     setTimeout(() => {
       this.setState({
         sindex: targetCard
       })
-      this._nextCard('right', width, 0, 100);
+      this._nextCard('left', width, 0, 100);
     }, 50);
   }
 
