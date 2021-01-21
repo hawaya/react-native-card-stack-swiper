@@ -80,7 +80,7 @@ class CardStack extends Component {
         } = this.props;
 
         if (((Math.abs(gestureState.dx) > horizontalThreshold) ||
-          (Math.abs(gestureState.dx) > horizontalThreshold * 0.4 &&
+          (Math.abs(gestureState.dx) > horizontalThreshold * 0.3 &&
             swipeDuration < 1000)
         ) && this.props.horizontalSwipe) {
 
@@ -129,7 +129,7 @@ class CardStack extends Component {
         } = this.props;
 
         if (((Math.abs(gestureState.dx) > horizontalThreshold) ||
-          (Math.abs(gestureState.dx) > horizontalThreshold * 0.6 &&
+          (Math.abs(gestureState.dx) > horizontalThreshold * 0.3 &&
             swipeDuration < 1000)
         ) && this.props.horizontalSwipe) {
 
@@ -168,7 +168,7 @@ class CardStack extends Component {
         return true;
       },
     });
-  
+
     this.nopeOpacity = this.state.drag.x.interpolate({
       inputRange: [-width / 2, 0, width / 2],
       outputRange: [1, 0, 0],
