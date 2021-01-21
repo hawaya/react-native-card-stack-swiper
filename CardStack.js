@@ -80,8 +80,8 @@ class CardStack extends Component {
         } = this.props;
 
         if (((Math.abs(gestureState.dx) > horizontalThreshold) ||
-          (Math.abs(gestureState.dx) > horizontalThreshold * 0.6 &&
-            swipeDuration < 150)
+          (Math.abs(gestureState.dx) > horizontalThreshold * 0.4 &&
+            swipeDuration < 1000)
         ) && this.props.horizontalSwipe) {
 
           const swipeDirection = (gestureState.dx < 0) ? width * -1.5 : width * 1.5;
@@ -96,7 +96,7 @@ class CardStack extends Component {
           }
         } else if (((Math.abs(gestureState.dy) > verticalThreshold) ||
           (Math.abs(gestureState.dy) > verticalThreshold * 0.8 &&
-            swipeDuration < 150)
+            swipeDuration < 1000)
         ) && this.props.verticalSwipe) {
 
           const swipeDirection = (gestureState.dy < 0) ? height * -1 : height;
@@ -130,7 +130,7 @@ class CardStack extends Component {
 
         if (((Math.abs(gestureState.dx) > horizontalThreshold) ||
           (Math.abs(gestureState.dx) > horizontalThreshold * 0.6 &&
-            swipeDuration < 150)
+            swipeDuration < 1000)
         ) && this.props.horizontalSwipe) {
 
           const swipeDirection = (gestureState.dx < 0) ? width * -1.5 : width * 1.5;
@@ -145,7 +145,7 @@ class CardStack extends Component {
           }
         } else if (((Math.abs(gestureState.dy) > verticalThreshold) ||
           (Math.abs(gestureState.dy) > verticalThreshold * 0.8 &&
-            swipeDuration < 150)
+            swipeDuration < 1000)
         ) && this.props.verticalSwipe) {
 
           const swipeDirection = (gestureState.dy < 0) ? height * -1 : height;
@@ -168,6 +168,18 @@ class CardStack extends Component {
         return true;
       },
     });
+  
+    this.nopeOpacity = this.state.drag.x.interpolate({
+      inputRange: [-width / 2, 0, width / 2],
+      outputRange: [1, 0, 0],
+      extrapolate: 'clamp'
+    })
+
+    this.likeOpacity = this.state.drag.x.interpolate({
+      inputRange: [-width / 2, 0, width / 2],
+      outputRange: [0, 0, 1],
+      extrapolate: 'clamp'
+    })
   }
 
   componentDidUpdate(prevProps) {
@@ -464,11 +476,9 @@ class CardStack extends Component {
 
   renderLikeLabel(){
     const { renderLikeLabel, renderLikeLabelStyle } = this.props
-    const { drag } = this.state
-    const likeOpacity = drag.x.interpolate({ inputRange: [-width / 3, width * .025, width / 3], outputRange: [0, 0, 1], extrapolate: 'clamp', });
     if (renderLikeLabel) {
       return(
-        <Animated.View style={[renderLikeLabelStyle, { opacity: likeOpacity }]} >
+        <Animated.View style={[renderLikeLabelStyle, { opacity: this.likeOpacity }]} >
           {renderLikeLabel()}
         </Animated.View>
       )
@@ -479,11 +489,9 @@ class CardStack extends Component {
 
   renderNopeLabel(){
     const { renderNopeLabel, renderNopeLabelStyle } = this.props
-    const { drag } = this.state
-    const nopeOpacity = drag.x.interpolate({ inputRange: [-width / 3, 0, width / 3], outputRange: [1, 0, 0], extrapolate: 'clamp', });
     if (renderNopeLabel) {
       return(
-        <Animated.View style={[renderNopeLabelStyle, { opacity: nopeOpacity }]} >
+        <Animated.View style={[renderNopeLabelStyle, { opacity: this.nopeOpacity }]} >
           {renderNopeLabel()}
         </Animated.View>
       )
