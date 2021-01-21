@@ -235,7 +235,7 @@ class CardStack extends Component {
       {
         toValue: 0,
         duration: this.props.duration,
-        useNativeDriver: this.props.useNativeDriver || false,
+        useNativeDriver: true,
       }
     ).start();
     Animated.spring(
@@ -243,7 +243,7 @@ class CardStack extends Component {
       {
         toValue: { x: 0, y: 0 },
         duration: this.props.duration,
-        useNativeDriver: this.props.useNativeDriver || false,
+        useNativeDriver: true,
       }
     ).start();
   }
@@ -320,7 +320,7 @@ class CardStack extends Component {
         {
           toValue: 0,
           duration: this.props.duration,
-          useNativeDriver: this.props.useNativeDriver || false,
+          useNativeDriver: true,
         }
       ).start();
 
@@ -329,7 +329,7 @@ class CardStack extends Component {
         {
           toValue: { x: 0, y: 0 },
           duration: this.props.duration,
-          useNativeDriver: this.props.useNativeDriver || false,
+          useNativeDriver: true,
         }
       ).start();
     })
@@ -388,7 +388,7 @@ class CardStack extends Component {
         {
           toValue: 220,
           duration,
-          useNativeDriver: this.props.useNativeDriver || false,
+          useNativeDriver: true,
         }
       ).start();
 
@@ -397,7 +397,7 @@ class CardStack extends Component {
         {
           toValue: { x: (horizontalSwipe) ? x : 0, y: (verticalSwipe) ? y : 0 },
           duration,
-          useNativeDriver: this.props.useNativeDriver || false,
+          useNativeDriver: true,
         }
       ).start(() => {
 
