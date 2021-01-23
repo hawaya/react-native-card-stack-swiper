@@ -114,6 +114,7 @@ class CardStack extends Component {
         else {
           this._resetCard();
         }
+        return;
       },
       onPanResponderTerminate: (evt, gestureState) => {
         this.props.onSwipeEnd();
@@ -163,6 +164,7 @@ class CardStack extends Component {
         else {
           this._resetCard();
         }
+        return;
       },
       onShouldBlockNativeResponder: (evt, gestureState) => {
         return true;
@@ -585,7 +587,6 @@ CardStack.propTypes = {
   onSwipedRight: PropTypes.func,
   onSwipedTop: PropTypes.func,
   onSwipedBottom: PropTypes.func,
-  onSwiped: PropTypes.func,
   onSwipedAll: PropTypes.func,
   onSwipe: PropTypes.func,
 
@@ -629,7 +630,7 @@ CardStack.defaultProps = {
   horizontalSwipe: true,
   horizontalThreshold: width / 2,
   outputRotationRange: ['-15deg', '0deg', '15deg'],
-  duration: 300
+  duration: 100
 }
 polyfill(CardStack);
 export default CardStack;
